@@ -1,0 +1,20 @@
+
+.ListMenu{
+    list-style-type: none;
+    display: flex;
+    align-items: stretch;
+    align-self:center;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: burlywood;
+    
+}
+.ListMenu li{
+    border-style: solid;
+    padding: .75em;
+    background-color: lightgray;
+}
+.ListMenu li:hover{
+    color: blueviolet;
+}
