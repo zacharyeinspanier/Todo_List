@@ -1,0 +1,9 @@
+1. Need a header explaining the app
+2. basic layout of app
+    Enter name of List <input>type here</input> <button> create List</button>
+    Select your list<selecto></select>
+        Select List
+        DisplayList
+    List displayed here
+
+    Class component for Lists, function componets for rest
