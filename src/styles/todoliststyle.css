@@ -1,0 +1,20 @@
+.showTodoList{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+}
+.showTodoList label{
+    font-weight: bold;
+    font-size: 2em;
+}
+.noShow{
+    display: none;
+}
+
+.showTodoList input{
+    border-style: hidden;
+}
+
+

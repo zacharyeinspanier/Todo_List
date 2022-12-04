@@ -7,15 +7,13 @@ const SelectList = ({list, onListSelect}) => {
         onListSelect(item);
     }
 
-
   return (
     <form>
-      <label>Todo Lists</label>
-
       <ul className='ListMenu'>
-        {list.map((item) => (
-          <li onClick={() =>listClick(item)}>
-            {item}
+        {
+        list.map((item) => (
+          <li onClick={() =>listClick(item.name)} >
+            {item.name}
           </li>
         ))}
       </ul>

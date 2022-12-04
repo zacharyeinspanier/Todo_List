@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
-const AddItem = ({addItem}) => {
+const AddItem = ({displayContent, addItem}) => {
   const [item, setItem] = useState("");
 
   function onEnter(event) {
     event.preventDefault();
     addItem(item);
   }
-
   return (
-    <li>
+    <li calssName='showTodoList'>
       <form onSubmit={(event) => onEnter(event)}>
         <input
           value={item}

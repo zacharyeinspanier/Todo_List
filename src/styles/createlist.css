@@ -1,0 +1,20 @@
+.createList{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.createList label{
+    display: flex;
+    justify-content: center;
+   
+    width:100%;
+}
+.createList div{
+    font-size: 2em;
+    background-color: lightblue;
+}
+.createList input{
+    padding: 1em;
+}
