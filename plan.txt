@@ -1,9 +1,32 @@
-1. Need a header explaining the app
-2. basic layout of app
-    Enter name of List <input>type here</input> <button> create List</button>
-    Select your list<selecto></select>
-        Select List
-        DisplayList
-    List displayed here
+components:
 
-    Class component for Lists, function componets for rest
+App:
+    -returns Listmanager and Display List
+    -contains useState of all Lists
+            and useState for the selected list
+    - Manages add and delete functions
+ListManager:
+    - returns a list of Lists and createList component
+DisplayList:
+    -return the currently selected list 
+CreateList:
+    - returns input box to create a list
+AddItem:
+    -returns input box to add item
+
+
+Update: App, ListManager, and DisplayList
+
+ListManager:
+    - returns a list of Lists and createList component
+    - Contains useState of all Lists
+    - needs to add and remove lists
+    - drop down to select list type and delete list 
+DisplayList
+    -return the currently selected list 
+    - add list item
+App
+     -returns Listmanager and Display List
+     - contains useState of selected list
+     - needs to save selected list and pass it to List manager 
+     - Save list 

@@ -6,9 +6,10 @@ const AddItem = ({displayContent, addItem}) => {
   function onEnter(event) {
     event.preventDefault();
     addItem(item);
+    setItem('');
   }
   return (
-    <li calssName='showTodoList'>
+    <li className='showTodoList'>
       <form onSubmit={(event) => onEnter(event)}>
         <input
           value={item}

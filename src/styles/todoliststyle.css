@@ -1,20 +1,30 @@
 .showTodoList{
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    align-content: center;
 }
-.showTodoList label{
+.showTodoList h2{
+    text-align: center;
     font-weight: bold;
-    font-size: 2em;
 }
 .noShow{
     display: none;
 }
-
 .showTodoList input{
     border-style: hidden;
 }
+.listcontainer{
+    text-align: center;
+    padding-left: 6em;
+}
+.todoListItems{
+    display: inline-block;
+    text-align: left;
+}
+.buttonContainer{
+    text-align: center;
+    padding-top: 1em;
+}
+
 
 

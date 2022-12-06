@@ -1,0 +1,19 @@
+body{
+    margin:auto;
+    width: 85%;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+main{
+    border-style: solid;
+    border-top: none;
+}
+header{
+    margin-top: 2em;
+    border-style: solid;
+}
+header h1, header h2{
+    text-align: center;
+}

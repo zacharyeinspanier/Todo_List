@@ -4,33 +4,32 @@ import "../styles/todoliststyle.css";
 
 //Props: selectedList, addItem
 
-class DisplayList extends React.Component {
-  //connnect cross off
+const DisplayList = ({selectedList, setSelectedList}) =>  {
 
-  render() {
-    let className = "showTodoList";
-
-    if (
-      this.props.selectedList.name === "" ||
-      this.props.selectedList.name === null ||
-      this.props.selectedList.name === undefined
-    ) {
-      className = "noShow";
-    }
+  function addListItem(listItem) {
+    const newList = [...selectedList.list, listItem]
+    setSelectedList(thest =>({name: selectedList.name, list: newList}));
+  }
+  // <button onClick={deleteList}>Delete List</button>
 
     return (
-      <div className={className}>
-        <label>{this.props.selectedList.name}</label>
-        <ul className="todoListItems">
-          {this.props.selectedList.list.map((element) => {
-            return <li>{element}</li>;
-          })}
-          <AddItem addItem={this.props.addItem} />
-        </ul>
-        <button onClick={this.props.deleteList}>Delete List</button>
+      <div>
+        <div >
+          <h2>{selectedList.name}</h2>
+        </div>
+        <div>
+          <ul >
+            {
+            selectedList.list.map((listItem)=>{
+              return<li>{listItem}</li>
+            })}
+            <li></li>
+            <AddItem addItem={addListItem} />
+          </ul>
+        </div>
       </div>
     );
-  }
+
 }
 
 export default DisplayList;
