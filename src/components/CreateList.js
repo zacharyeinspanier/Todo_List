@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../styles/createlist.css";
 
 const CreateList = ({ onEnterAdd }) => {
   const [listName, setListName] = useState("");
@@ -7,19 +6,24 @@ const CreateList = ({ onEnterAdd }) => {
   function onEnter(event) {
     //Prevent page reload
     event.preventDefault();
-    onEnterAdd(listName);
-    setListName("");
+    onButtonClick(listName);
   }
 
+
   return (
-      <form onSubmit={(event) => onEnter(event)}>
+    <div className="createList">
+      <label>
+        <div>Enter List Name</div>
+      </label>
+      <div>
         <input
           placeholder="enter a list name"
-          type="text"
           value={listName}
           onChange={(event) => setListName(event.target.value)}
         />
-      </form>
+        <button onClick={buttonClick}>CreateList</button>
+      </div>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddItem = ({displayContent, addItem}) => {
+const AddItem = ({addItem}) => {
   const [item, setItem] = useState("");
 
   function onEnter(event) {
@@ -8,8 +8,9 @@ const AddItem = ({displayContent, addItem}) => {
     addItem(item);
     setItem('');
   }
+
   return (
-    <li className='showTodoList'>
+    <li calssName='showTodoList'>
       <form onSubmit={(event) => onEnter(event)}>
         <input
           value={item}
