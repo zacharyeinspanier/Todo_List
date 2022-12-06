@@ -1,19 +1,23 @@
 import React from "react";
 import CreateList from "./CreateList";
-import "../styles/list-menu.css";
+import "../styles/ListManager.css";
 
-const ListManager = ({ todoLists, addList, selectList }) => {
+const ListManager = ({ todoLists, addNewList, selectNewList }) => {
   return (
-    <div>
+    <div className='AllTodoListsContainer'>
       <h3>All Lists</h3>
-      <div>
+      <div >
         <ul>
           {
-          todoLists.length === 0 ? null :
-          todoLists.map((list) =>{
-            return(<li onClick={() => selectList(list)}>{list.name}</li>);
-          })}
-          <CreateList onEnterAdd={addList} />
+            todoLists.length === 0 ? null : 
+              todoLists.map((todoList) => {
+                return (
+                  <li onClick={() => selectNewList(todoList)}>{todoList.name}</li>
+                );})
+          }
+          <li>
+            <CreateList addNewList={addNewList} />
+          </li>
         </ul>
       </div>
     </div>

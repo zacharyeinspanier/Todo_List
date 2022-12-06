@@ -1,28 +1,25 @@
 import React, { useState } from "react";
 
-const CreateList = ({ onEnterAdd }) => {
+const CreateList = ({addNewList}) => {
   const [listName, setListName] = useState("");
 
   function onEnter(event) {
     //Prevent page reload
     event.preventDefault();
-    onButtonClick(listName);
+    addNewList(listName);
+    setListName("");
   }
 
-
   return (
-    <div className="createList">
-      <label>
-        <div>Enter List Name</div>
-      </label>
-      <div>
+    <div>
+      <form onSubmit={(event) => onEnter(event)}>
         <input
+          type="text"
           placeholder="enter a list name"
           value={listName}
           onChange={(event) => setListName(event.target.value)}
         />
-        <button onClick={buttonClick}>CreateList</button>
-      </div>
+      </form>
     </div>
   );
 };

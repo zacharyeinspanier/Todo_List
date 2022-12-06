@@ -1,0 +1,11 @@
+.AppContainer{
+    display: flex;
+    flex-direction: row;
+}
+.AllListsSideMenu{
+    width: 30%;
+    border-right: solid;
+}
+.DisplayListContainer{
+    width: 70%;
+}

@@ -1,66 +1,76 @@
 import React, { useState } from "react";
-import CreateList from "./CreateList";
-import SelectList from "./SelectList";
+import ListManager from "./ListManager";
 import DisplayList from "./DisplayList";
+import "../styles/TodoListApp.css"
 
 const App = () => {
   const [todoLists, setTodoLists] = useState([]);
   const [selectedList, setSelectedList] = useState({ name: "", list: [] });
 
   //adds a new todo list with name: value
-  function addList(value) {
+  function addNewList(value) {
     const newTodoList = [...todoLists, { name: value, list: [] }];
     setTodoLists(newTodoList);
   }
 
   //saves previous todo list and retrevies the todo list with name value
-  function listSelected(value) {
-    const currentName = selectedList.name;
-    const currentList = selectedList.list;
-    const newList = todoLists;
+  function selectNewList(todoList) {
+    const tempList = todoLists;
 
-    // Find the previous todo list and save it's list
-    newList.map((item) => {
-      if (item.name === currentName) {
-        item.list = currentList;
+    console.log(selectedList.list);
+    // Find the previous todo list
+    tempList.map((item) => {
+      if (item.name === selectedList.name) {
+        item.list = selectedList.list;
       }
     });
-    setTodoLists(newList);
-
-    //set the new list
-    const nextList = todoLists.map((item) => {
-      if (item.name === value) {
-        setSelectedList(item);
-      }
-    });
+    //save the list
+    setTodoLists(tempList);
+    //set new list
+    setSelectedList(todoList);
   }
 
-  function addListItem(value) {
-    const newList = [...selectedList.list, value];
-    setSelectedList((selectedList) => ({ ...selectedList, list: newList }));
+  function addListItem(item) {
+    //new list of items
+    const tempSelectedList = [...selectedList.list, item];
+    // update the list state
+    setSelectedList((selectedList) => ({
+      ...selectedList,
+      list: tempSelectedList,
+    }));
   }
 
-  function deleteList(){
+  function deleteList() {
     const listName = selectedList.name;
     const newList = todoLists;
 
     //search list for selected and deleted it
-    for(let i = 0; i< newList.length; ++i){
-      if(newList[i].name === listName){
-        newList.splice(i,1)
+    for (let i = 0; i < newList.length; ++i) {
+      if (newList[i].name === listName) {
+        newList.splice(i, 1);
         break;
       }
     }
     setTodoLists(newList);
-    setSelectedList({ name: "", list: [] })
+    setSelectedList({ name: "", list: [] });
   }
 
-
   return (
-    <div>
-      <CreateList onButtonClick={addList} />
-      <SelectList list={todoLists} onListSelect={listSelected} />
-      <DisplayList selectedList={selectedList} addItem={addListItem} deleteList={deleteList}/>
+    <div className='AppContainer'>
+      <aside className='AllListsSideMenu'>
+        <ListManager
+          todoLists={todoLists}
+          selectNewList={selectNewList}
+          addNewList={addNewList}
+        />
+      </aside>
+      <div className='DisplayListContainer'>
+        <DisplayList
+          selectedList={selectedList}
+          addListItem={addListItem}
+          deleteList={deleteList}
+        />
+      </div>
     </div>
   );
 };

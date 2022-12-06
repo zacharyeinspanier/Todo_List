@@ -1,0 +1,23 @@
+.SelectedListContainer input{
+    border-style: hidden;
+}
+
+.SelectedListContainer{
+    text-align: center;
+    margin: 1em;
+}
+.SelectedListContainer h3{
+    padding-bottom: .5em;
+}
+.SelectedListContainer ul{
+    display: inline-block;
+    text-align: left;
+    
+}
+.SelectedListContainer li{
+    margin-top: .25em;
+
+}
+.SelectedListContainer li:last-child{
+    border-style: none;
+}

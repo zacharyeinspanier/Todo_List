@@ -1,20 +1,22 @@
 
-.createdLists{
+.AllTodoListsContainer{
     margin: 1em;
 }
-.createdLists h3{
+.AllTodoListsContainer h3{
     text-align: center;
     padding-bottom: .5em;
 }
-.lists{
+.AllTodoListsContainer ul{
     list-style: none;
-    
 }
-.lists li{
+.AllTodoListsContainer li{
     margin-top: .25em;
     text-align: center;
     border-style: solid;
 }
-.lists li:last-child{
+.AllTodoListsContainer li:last-child{
     border-style: none;
+}
+.AllTodoListsContainer input{
+    width: 100%;
 }

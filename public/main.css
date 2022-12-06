@@ -8,11 +8,11 @@ body{
 }
 main{
     border-style: solid;
-    border-top: none;
 }
 header{
     margin-top: 2em;
     border-style: solid;
+    border-bottom: none;
 }
 header h1, header h2{
     text-align: center;

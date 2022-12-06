@@ -1,37 +1,23 @@
-import { render } from "@testing-library/react";
+
 import React from "react";
 import AddItem from './AddItem';
-import "../styles/Itemliststyle.css";
+import "../styles/DisplayList.css";
 
-//Props: selectedList, addItem
+const DisplayList = ({selectedList, addListItem}) =>{
 
-class DisplayList extends React.Component {
-  //connnect cross off
-
-  render() {
-    let className = "showTodoList";
-
-    if (
-      this.props.selectedList.name === "" ||
-      this.props.selectedList.name === null ||
-      this.props.selectedList.name === undefined
-    ) {
-      className = "noShow";
-    }
 
     return (
-      <div className={className}>
-        <label>{this.props.selectedList.name}</label>
-        <ul className="todoListItems">
-          {this.props.selectedList.list.map((element) => {
+      <div className='SelectedListContainer'>
+        <h3>{selectedList.name}</h3>
+        <ul>
+          {selectedList.list.map((element) => {
             return <li>{element}</li>;
           })}
-          <AddItem addItem={this.props.addItem} />
+          <li><AddItem addListItem={addListItem} /></li>
         </ul>
-        <button onClick={this.props.deleteList}>Delete List</button>
       </div>
     );
   }
-}
+
 
 export default DisplayList;
