@@ -12,22 +12,23 @@ const App = () => {
     const newTodoList = [...todoLists, { name: value, list: [] }];
     setTodoLists(newTodoList);
   }
+  function deleteList(todoList) {
+    //re-render happens when NEW object appears on state
+    // It is necessary to create a NEW list
+    const tempList = [...todoLists]
 
-  //saves previous todo list and retrevies the todo list with name value
-  function selectNewList(todoList) {
-    const tempList = todoLists;
+    if(todoList.name ===selectedList.name){
+      setSelectedList({ name: "", list: [] });
+    }
 
-    console.log(selectedList.list);
     // Find the previous todo list
-    tempList.map((item) => {
-      if (item.name === selectedList.name) {
-        item.list = selectedList.list;
+    tempList.map((item, index) => {
+      if (item.name === todoList.name) {
+        tempList.splice(index,1);
+        return;
       }
     });
-    //save the list
     setTodoLists(tempList);
-    //set new list
-    setSelectedList(todoList);
   }
 
   function addListItem(item) {
@@ -39,21 +40,49 @@ const App = () => {
       list: tempSelectedList,
     }));
   }
+  
+  function deletListItem(item){
+    //get list items
+    const tempList = [...selectedList.list]
 
-  function deleteList() {
-    const listName = selectedList.name;
-    const newList = todoLists;
-
-    //search list for selected and deleted it
-    for (let i = 0; i < newList.length; ++i) {
-      if (newList[i].name === listName) {
-        newList.splice(i, 1);
-        break;
+    //Map through, find list item, remove
+    tempList.map((listItem, index) => {
+      if (listItem === item) {
+        tempList.splice(index,1);
+        return;
       }
-    }
-    setTodoLists(newList);
-    setSelectedList({ name: "", list: [] });
+    });
+
+    setSelectedList((selectedList) => ({
+      ...selectedList,
+      list: tempList
+    }));
+
+
+
+
   }
+
+  //saves previous todo list and retrevies the todo list with name value
+  function selectNewList(todoList) {
+    const tempList = todoLists;
+
+    // Find the previous todo list
+    tempList.map((item) => {
+      if (item.name === selectedList.name) {
+        item.list = selectedList.list;
+        return;
+      }
+    });
+    //save the list
+    setTodoLists(tempList);
+    //set new list
+    setSelectedList(todoList);
+  }
+
+ 
+
+  
 
   return (
     <div className='AppContainer'>
@@ -62,13 +91,14 @@ const App = () => {
           todoLists={todoLists}
           selectNewList={selectNewList}
           addNewList={addNewList}
+          deleteList={deleteList}
         />
       </aside>
       <div className='DisplayListContainer'>
         <DisplayList
           selectedList={selectedList}
           addListItem={addListItem}
-          deleteList={deleteList}
+          deletListItem={deletListItem}
         />
       </div>
     </div>

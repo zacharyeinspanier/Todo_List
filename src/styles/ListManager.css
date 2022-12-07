@@ -12,11 +12,24 @@
 .AllTodoListsContainer li{
     margin-top: .25em;
     text-align: center;
-    border-style: solid;
 }
 .AllTodoListsContainer li:last-child{
     border-style: none;
 }
 .AllTodoListsContainer input{
     width: 100%;
+}
+.TodoListContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.TodoListContainer li{
+    border-style: solid;
+    width: 100%;
+   
+}
+.DeleteBtn{
+
 }
