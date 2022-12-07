@@ -1,5 +1,5 @@
 import React from "react";
-import AddItem from "./AddItem";
+import Add from "./Add";
 import Delete from "./Delete";
 import "../styles/DisplayList.css";
 
@@ -17,7 +17,7 @@ const DisplayList = ({ selectedList, addListItem, deletListItem }) => {
           );
         })}
         <li>
-          <AddItem addListItem={addListItem} />
+          <Add addListOrItem={addListItem} placeHolderTxt='Enter Item Name'/>
         </li>
       </ul>
     </div>

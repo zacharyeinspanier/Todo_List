@@ -1,5 +1,5 @@
 import React from "react";
-import CreateList from "./CreateList";
+import Add from "./Add.js";
 import Delete from "./Delete.js";
 import "../styles/ListManager.css";
 
@@ -25,7 +25,7 @@ const ListManager = ({ todoLists, addNewList, selectNewList, deleteList }) => {
                 );
               })}
           <li>
-            <CreateList addNewList={addNewList} />
+            <Add addListOrItem={addNewList} placeHolderTxt="Enter List Name" />
           </li>
         </ul>
       </div>
