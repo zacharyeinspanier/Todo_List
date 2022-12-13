@@ -1,8 +1,6 @@
 Todos:
 
 Functional
-
-1. Move functions from App.js to Select List and Display List
 2. Add option for text note
 3. Handle duplicates
     -create unique keys
@@ -12,6 +10,5 @@ Functional
 Styling:
 1. Make strike through
 2. make selected list gray/or color
-3. remove unnecessary css files
 4. update styling to make pretty
 

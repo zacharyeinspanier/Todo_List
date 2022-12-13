@@ -21,3 +21,15 @@
 .SelectedListContainer li:last-child{
     border-style: none;
 }
+.ListItemContainer{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.ListItemContainer li:hover{
+    text-decoration: line-through;
+    color: gray;
+}
+.strikeThrough{
+    text-decoration: line-through
+}
