@@ -7,13 +7,28 @@ body{
     padding: 0;
 }
 main{
+    margin-top: 3em;
     border-style: solid;
+    border-radius: 10px;
+    border-width: 3px;
+    box-shadow: 0 0 10px;
 }
 header{
-    margin-top: 2em;
-    border-style: solid;
-    border-bottom: none;
+    padding: 1em 0;
+    border-bottom: solid;
+    border-width: 3px;
+    background-color: rgb(255, 246, 180);
+    border-radius: 10px;
 }
 header h1, header h2{
     text-align: center;
+}
+button{
+    border: none;
+    background-color: transparent;
+    padding-left: .2em;
+}
+input{
+    border: none;
+    background-color: transparent;
 }

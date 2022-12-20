@@ -16,6 +16,7 @@ const Add = ({ addListOrItem, placeHolderTxt }) => {
         onChange={(event) => setinputTxt(event.target.value)}
         placeholder={placeHolderTxt}
         type="text"
+        autoFocus
       ></input>
     </form>
   );

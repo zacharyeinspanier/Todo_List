@@ -3,9 +3,12 @@
     flex-direction: row;
 }
 .AllListsSideMenu{
-    width: 30%;
+    width: 35%;
     border-right: solid;
+    background-color:rgb(255, 246, 180);
+    border-radius: 10px;
 }
 .DisplayListContainer{
-    width: 70%;
+    border-radius: 10px;
+    width: 100%
 }
