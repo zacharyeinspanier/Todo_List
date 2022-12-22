@@ -8,15 +8,22 @@ const TextNote = ({ selectedList, updateNote }) => {
     setNote(selectedList.content.note);
   }, [selectedList]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      updateNote(note);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [note]);
+
   // Set the initial value to note
-  // update selectedList.contet.note
+  // update selectedList.content.note
   return (
     <textarea
       className="note"
       type="text"
       placeholder="Type a note..."
       value={note}
-      onChange={(event) => updateNote(event.target.value)}
+      onChange={(event) => setNote(event.target.value)}
     />
   );
 };

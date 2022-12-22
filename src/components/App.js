@@ -6,8 +6,9 @@ import "../styles/TodoListApp.css"
 
 const App = () => {
   const [todoLists, setTodoLists] = useState([]);
-  const [selectedList, setSelectedList] = useState({ name: "", content: {note: "", list:[]} });
-//  const [selectedList, setSelectedList] = useState({ name: "", content: {note: "", list:[{ value: '', strike: False}]});
+  const [selectedList, setSelectedList] = useState({ name: "", content: {note: "", list:[{ value: "", strike: false}]}});
+  //const [selectedList, setSelectedList] = useState({ name: "", content: {note: "", list:[]} });
+  
   //adds a new todo list with name: value
   function addNewList(value) {
     if(value ===""){
@@ -23,7 +24,7 @@ const App = () => {
     const tempList = [...todoLists]
 
     if(todoList.name ===selectedList.name){
-      setSelectedList({ name: "", content: {note: "", list:[]} });
+      setSelectedList({ name: "", content: {note: "", list:[{ value: "", strike: false}]} });
     }
 
     // Find the previous todo list
@@ -52,7 +53,7 @@ const App = () => {
     //save the list
     setTodoLists(newList);
     //set new list
-    console.log(todoList);
+
     setSelectedList(todoList);
   }
 

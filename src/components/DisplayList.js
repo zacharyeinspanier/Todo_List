@@ -5,17 +5,34 @@ import TextNote from "./TextNote";
 import "../styles/DisplayList.css";
 
 const DisplayList = ({ selectedList, setSelectedList }) => {
+  //const [selectedList, setSelectedList] = useState({ name: "", content: {note: "", list:[{ value: "", strike: False}]});
 
   //State with list of strike keys
 
+  function handleClick(element) {
+    //toggle between t and f
+    const toggleStrike = !element.strike;
 
-  function handleClick(event, id) {
-    console.log(id);
-    if (event.target.className === "") {
-      event.target.className = "strikeThrough";
-    } else {
-      event.target.className = "";
-    }
+    // create a new list
+    const newList = selectedList.content.list
+
+    // map through and find the elemnt.value
+    newList.map((todoListItem)=>{
+      if(todoListItem.value === element.value){
+        todoListItem.strike = toggleStrike;
+        return;
+      }
+    })
+
+    //set the state
+    setSelectedList((selectedList) => ({
+      ...selectedList,
+      content: {
+        ...selectedList.content,
+        list: newList
+      },
+    }));
+
     return;
   }
 
@@ -25,7 +42,7 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
 
     //Map through, find list item, remove
     newList.map((listItem, index) => {
-      if (listItem === item) {
+      if (listItem.value === item) {
         newList.splice(index, 1);
         return;
       }
@@ -38,11 +55,12 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
   }
 
   function addListItem(item) {
-    if(item === ""){
+    if (item === "") {
       return;
     }
+    const newItem = { value: item, strike: false };
     //new list of items
-    const newList = [...selectedList.content.list, item];
+    const newList = [...selectedList.content.list, newItem];
     // update the list state
     setSelectedList((selectedList) => ({
       ...selectedList,
@@ -51,14 +69,15 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
   }
 
   function updateNote(newNote) {
+    console.log("state is set")
     setSelectedList((selectedList) => ({
       ...selectedList,
       content: { ...selectedList.content, note: newNote },
     }));
   }
 
-  if(selectedList.name ===""){
-    return(<div></div>)
+  if (selectedList.name === "") {
+    return <div></div>;
   }
   return (
     <div className="SelectedListContainer">
@@ -69,15 +88,23 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
           {selectedList.content.list.map((element, index) => {
             return (
               <div className="ListItemContainer">
-                <li key={element+index}>{element}</li>
-                <Delete listOrItem={element} dltListOrItem={deletListItem} />
+                <li
+                  key={element.value + index}
+                  onClick={() => handleClick(element)}
+                  className = {`strike${element.strike.toString()}`}
+                >
+                  {element.value}
+                </li>
+                <Delete
+                  listOrItem={element.value}
+                  dltListOrItem={deletListItem}
+                />
               </div>
             );
           })}
           <Add addListOrItem={addListItem} placeHolderTxt="Enter Item Name" />
         </ul>
       </div>
-      
     </div>
   );
 };
