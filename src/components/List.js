@@ -6,6 +6,7 @@ const List = ({selectedList, deletListItem, addListItem, handleClick}) => {
   return (
     <div className="SelectedListContainer">
       <h3>{selectedList.name}</h3>
+      <div className="ListContentContainer">
       <ul>
           {selectedList.content.list.map((element, index) => {
             return (
@@ -26,6 +27,7 @@ const List = ({selectedList, deletListItem, addListItem, handleClick}) => {
           })}
           <li><Add addListItem={addListItem} placeHolderTxt="Add a list item..."/></li>
         </ul>
+        </div>
     </div>
   );
 };

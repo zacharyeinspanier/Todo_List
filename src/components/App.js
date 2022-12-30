@@ -9,6 +9,12 @@ function reducer(state, action) {
       if (action.payload.name === "") {
         return state;
       }
+      // check for dups => dups are not allowed
+      for(let i = 0; i < state.length; ++i){
+        if (state[i].name === action.payload.name){
+          return state
+        }
+      }
       return [...state, newItem(action.payload.name)];
     case "delete":
       return state.filter((item) => item.name !== action.payload.name);
@@ -44,6 +50,8 @@ function newContent(type) {
       return { list: [] };
     case "Note+List":
       return { note: "", list: [] };
+    default:
+      return { note: "", list: [] };
   }
 }
 
@@ -58,14 +66,14 @@ const App = () => {
   
   useEffect(()=>{
      // update selected List
-     state.map((list) =>{
-      if(list.name === selectedList.name){
-        setSelectedList(list);
+     for(let i = 0; i < state.length; ++i){
+      if (state[i].name === selectedList.name){
+        setSelectedList(state[i]);
         return;
       }
-      return;
-    })
-  }, [state])
+    }
+     
+  }, [state, selectedList])
 
   //adds a new todo list with name: value
   function addNewList(value) {

@@ -1,7 +1,4 @@
 import React, {useEffect} from "react";
-import Add from "./input/Add";
-import Delete from "./input/Delete";
-import TextNote from "./input/TextNote";
 import Note from "./Note";
 import List from "./List";
 import NoteList from "./NoteList"
@@ -41,6 +38,12 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
   function addListItem(item) {
     if (item === "") {
       return;
+    }
+    // check for dups => dups are not allowed
+    for(let i = 0; i < selectedList.content.list.length; ++i){
+      if (selectedList.content.list[i].value === item){
+        return;
+      }
     }
     //create item
     const newItem = { value: item, strike: false };

@@ -21,6 +21,11 @@
 .ListContentContainer input{
     margin-top: 1em;
 }
+.SoloListItemContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .note{
     padding-bottom: 3em;
     border: none;
