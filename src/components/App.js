@@ -1,74 +1,120 @@
-import React, { useState } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import ListManager from "./ListManager";
 import DisplayList from "./DisplayList";
-import "../styles/TodoListApp.css"
+import "../styles/TodoListApp.css";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "add":
+      if (action.payload.name === "") {
+        return state;
+      }
+      return [...state, newItem(action.payload.name)];
+    case "delete":
+      return state.filter((item) => item.name !== action.payload.name);
+    case "changeList":
+      return state.map((item) => {
+        if (item.name === action.payload.name) {
+          return { ...item, type: action.payload.itemType, content: newContent(action.payload.itemType) };
+        }
+        return item;
+      });
+    case "saveList":
+      return state.map((item) => {
+        if (item.name === action.payload.list.name) {
+          return action.payload.list;
+        }
+        return item;
+      });
+    
+
+    default:
+      return state;
+  }
+}
+
+function newItem(name) {
+  return { name: name, type:"Note+List",content: { note: "", list: [] } };
+}
+function newContent(type) {
+  switch (type) {
+    case "Note":
+      return { note: "" };
+    case "List":
+      return { list: [] };
+    case "Note+List":
+      return { note: "", list: [] };
+  }
+}
+
 
 
 const App = () => {
-  const [todoLists, setTodoLists] = useState([]);
-  const [selectedList, setSelectedList] = useState({ name: "", content: {note: "", list:[{ value: "", strike: false}]}});
-  //const [selectedList, setSelectedList] = useState({ name: "", content: {note: "", list:[]} });
+  const [state, dispatch] = useReducer(reducer, []);
+  const [selectedList, setSelectedList] = useState({
+    name: "",
+    content: { note: "", list: [{ value: "", strike: false }] },
+  });
   
+  useEffect(()=>{
+     // update selected List
+     state.map((list) =>{
+      if(list.name === selectedList.name){
+        setSelectedList(list);
+        return;
+      }
+      return;
+    })
+  }, [state])
+
   //adds a new todo list with name: value
   function addNewList(value) {
-    if(value ===""){
-      return;
-    }
-    const newTodoList = [...todoLists, { name: value, content: {note: "", list:[]} }];
-    setTodoLists(newTodoList);
+    dispatch({ type: "add", payload: { name: value } });
   }
 
-  function deleteList(todoList) {
-    //re-render happens when NEW object appears on state
-    // It is necessary to create a NEW list
-    const tempList = [...todoLists]
-
-    if(todoList.name ===selectedList.name){
-      setSelectedList({ name: "", content: {note: "", list:[{ value: "", strike: false}]} });
-    }
-
-    // Find the previous todo list
-    tempList.map((item, index) => {
-      if (item.name === todoList.name) {
-        tempList.splice(index,1);
-        return;
-      }
-    });
-    setTodoLists(tempList);
+  function deleteList(value) {
+    dispatch({ type: "delete", payload: { name: value } });
   }
-  
 
   //saves previous todo list and retrevies the todo list with name value
-  function selectNewList(todoList) {
-    const newList = todoLists;
+  function selectNewList(value) {
 
-    // Find the previous todo list
-    newList.map((item) => {
-      if (item.name === selectedList.name) {
-        item.content.note = selectedList.content.note;
-        item.content.list = selectedList.content.list;
-        return;
+    //save last selected list
+    if (selectedList.name !== "" && selectedList !== "undefined") {
+      const deepCopySelLst = JSON.parse(JSON.stringify(selectedList));
+      dispatch({ type: "saveList", payload: { list: deepCopySelLst} });
+    }
+
+    //set state for selected list
+    state.map((item) => {
+      if (item.name === value) {
+        // turn object into string, then parse it to an object
+        const deepCopy = JSON.parse(JSON.stringify(item));
+        setSelectedList(deepCopy);
       }
+      return item;
     });
-    //save the list
-    setTodoLists(newList);
-    //set new list
-
-    setSelectedList(todoList);
   }
 
+  function changedListType(value, action) {
+    dispatch({
+      type: "changeList",
+      payload: { name: value, itemType: action },
+    });
+  }
 
   return (
-    <div className='AppContainer'>
-      <aside className='AllListsSideMenu'>
+    <div className="AppContainer">
+      <aside className="AllListsSideMenu">
         <ListManager
-          todoLists={todoLists}
+          state={state}
           selectNewList={selectNewList}
           addNewList={addNewList}
           deleteList={deleteList}
+          changedListType={changedListType}
         />
       </aside>
-      <div className='DisplayListContainer'>
+      <div className="DisplayListContainer">
         <DisplayList
           selectedList={selectedList}
           setSelectedList={setSelectedList}

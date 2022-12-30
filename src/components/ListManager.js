@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
-import Add from "./Add.js";
-import Delete from "./Delete.js";
+import Add from "./input/Add.js";
+import Delete from "./input/Delete.js";
+import OptionMenu from "./input/OptionMenu.js";
 import "../styles/ListManager.css";
 
-const ListManager = ({ todoLists, addNewList, selectNewList, deleteList }) => {
+const ListManager = ({ state, addNewList, selectNewList, deleteList, changedListType }) => {
   const ref = useRef(null);
   //update ref to the currently selected menu item
   function listSelect(event, list) {
@@ -20,33 +21,37 @@ const ListManager = ({ todoLists, addNewList, selectNewList, deleteList }) => {
       //change class name
       ref.current.className = "selectList";
     }
-    selectNewList(list);
+    selectNewList(list.name);
     return;
   }
+
+
+
 
   return (
     <div className="AllTodoListsContainer">
       <h3>All Lists</h3>
       <div>
         <ul className="TodoListNavMenu">
-          {todoLists.length === 0
+          {state.length === 0
             ? null
-            : todoLists.map((todoList, index) => {
+            : state.map((item, index) => {
                 return (
                   <div className="TodoListContainer">
                     <li
                       className=""
-                      key={todoList.name + index}
-                      onClick={(event) => listSelect(event, todoList)}
+                      key={item.name + index}
+                      onClick={(event) => listSelect(event, item)}
                     >
-                      {todoList.name}
+                      {item.name}
                     </li>
-                    <Delete listOrItem={todoList} dltListOrItem={deleteList} />
+                    <OptionMenu item={item.name} changedListType= {changedListType} />
+                    <Delete item={item.name} deletListItem={deleteList} />
                   </div>
                 );
               })}
           <li>
-            <Add addListOrItem={addNewList} placeHolderTxt="Enter List Name" />
+            <Add addListItem={addNewList} placeHolderTxt="Enter List Name" />
           </li>
         </ul>
       </div>

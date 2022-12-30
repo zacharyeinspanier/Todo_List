@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 
-const Add = ({ addListOrItem, placeHolderTxt }) => {
+const Add = ({ addListItem, placeHolderTxt }) => {
   const [inputTxt, setinputTxt] = useState("");
 
   function onEnter(event) {
     event.preventDefault();
-    addListOrItem(inputTxt);
+    addListItem(inputTxt);
     setinputTxt("");
   }
 
   return (
     <form onSubmit={(event) => onEnter(event)}>
       <input
+        className = "addInput"
         value={inputTxt}
         onChange={(event) => setinputTxt(event.target.value)}
         placeholder={placeHolderTxt}

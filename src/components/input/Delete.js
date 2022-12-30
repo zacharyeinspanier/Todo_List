@@ -1,8 +1,8 @@
 import React from "react";
 
-const Delete = ({ listOrItem, dltListOrItem }) => {
+const Delete = ({ item, deletListItem }) => {
   function clickDel() {
-    dltListOrItem(listOrItem);
+    deletListItem(item);
   }
 
   return (

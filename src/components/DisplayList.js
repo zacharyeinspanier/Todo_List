@@ -1,75 +1,57 @@
-import React from "react";
-import Add from "./Add";
-import Delete from "./Delete";
-import TextNote from "./TextNote";
+import React, {useEffect} from "react";
+import Add from "./input/Add";
+import Delete from "./input/Delete";
+import TextNote from "./input/TextNote";
+import Note from "./Note";
+import List from "./List";
+import NoteList from "./NoteList"
 import "../styles/DisplayList.css";
 
 const DisplayList = ({ selectedList, setSelectedList }) => {
-  //const [selectedList, setSelectedList] = useState({ name: "", content: {note: "", list:[{ value: "", strike: False}]});
-
-  //State with list of strike keys
+  
+  useEffect(()=>{}, [selectedList])
 
   function handleClick(element) {
-    //toggle between t and f
-    const toggleStrike = !element.strike;
-
-    // create a new list
-    const newList = selectedList.content.list
-
-    // map through and find the elemnt.value
-    newList.map((todoListItem)=>{
-      if(todoListItem.value === element.value){
-        todoListItem.strike = toggleStrike;
-        return;
-      }
-    })
 
     //set the state
     setSelectedList((selectedList) => ({
       ...selectedList,
       content: {
         ...selectedList.content,
-        list: newList
+        list: selectedList.content.list.map((item)=>{
+          if(item.value === element.value){
+            return({value: item.value, strike: !element.strike})
+          }
+          return item;
+        })
       },
     }));
-
-    return;
   }
 
-  function deletListItem(item) {
-    //get list items
-    const newList = [...selectedList.content.list];
-
-    //Map through, find list item, remove
-    newList.map((listItem, index) => {
-      if (listItem.value === item) {
-        newList.splice(index, 1);
-        return;
-      }
-    });
-
+  function deletListItem(itemName) {
+   
     setSelectedList((selectedList) => ({
       ...selectedList,
-      content: { ...selectedList.content, list: newList },
-    }));
+      content: { ...selectedList.content, list: selectedList.content.list.filter(
+        (item) => item.value !== itemName)
+      }}));
+
   }
 
   function addListItem(item) {
     if (item === "") {
       return;
     }
+    //create item
     const newItem = { value: item, strike: false };
-    //new list of items
-    const newList = [...selectedList.content.list, newItem];
     // update the list state
     setSelectedList((selectedList) => ({
       ...selectedList,
-      content: { ...selectedList.content, list: newList },
+      content: { ...selectedList.content, list: [...selectedList.content.list, newItem] },
     }));
   }
 
   function updateNote(newNote) {
-    console.log("state is set")
     setSelectedList((selectedList) => ({
       ...selectedList,
       content: { ...selectedList.content, note: newNote },
@@ -79,34 +61,19 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
   if (selectedList.name === "") {
     return <div></div>;
   }
-  return (
-    <div className="SelectedListContainer">
-      <h3>{selectedList.name}</h3>
-      <div className="ListContentContainer">
-        <TextNote selectedList={selectedList} updateNote={updateNote} />
-        <ul>
-          {selectedList.content.list.map((element, index) => {
-            return (
-              <div className="ListItemContainer">
-                <li
-                  key={element.value + index}
-                  onClick={() => handleClick(element)}
-                  className = {`strike${element.strike.toString()}`}
-                >
-                  {element.value}
-                </li>
-                <Delete
-                  listOrItem={element.value}
-                  dltListOrItem={deletListItem}
-                />
-              </div>
-            );
-          })}
-          <Add addListOrItem={addListItem} placeHolderTxt="Enter Item Name" />
-        </ul>
-      </div>
-    </div>
-  );
-};
+  else if(selectedList.type === "Note"){
+    return(<Note selectedList={selectedList} updateNote={updateNote}/>)
+  }
+  else if(selectedList.type === "List"){
+
+    return(<List selectedList={selectedList} deletListItem={deletListItem} addListItem={addListItem} handleClick={handleClick}/>)
+  }
+  else if(selectedList.type === "Note+List"){
+    return(<NoteList selectedList={selectedList} updateNote={updateNote} deletListItem={deletListItem} addListItem={addListItem} handleClick={handleClick}/>)
+  }
+  else{
+    return <div></div>;
+  }
+}
 
 export default DisplayList;

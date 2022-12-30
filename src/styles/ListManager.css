@@ -13,7 +13,7 @@
     margin-top: .25em;
     text-align: center;
 }
-.AllTodoListsContainer li:last-child{
+.addInput{
     border-style: none;
 }
 .AllTodoListsContainer input{
@@ -32,4 +32,10 @@
 }
 .selectList {
     background-color: white;
+}
+.DeleteBtn:hover{
+    background-color: rgb(184, 179, 136);
+}
+.DeleteBtn{
+    cursor: pointer;
 }
