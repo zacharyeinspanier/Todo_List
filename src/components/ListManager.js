@@ -25,9 +25,6 @@ const ListManager = ({ state, addNewList, selectNewList, deleteList, changedList
     return;
   }
 
-
-
-
   return (
     <div className="AllTodoListsContainer">
       <h3>All Lists</h3>

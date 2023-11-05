@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import Delete from "./input/Delete"
 import Add from "./input/Add"
-import TextNote from "./input/TextNote"
 
 
 const NoteList = ({selectedList, updateNote, deletListItem, addListItem, handleClick})=>{
@@ -11,7 +10,13 @@ const NoteList = ({selectedList, updateNote, deletListItem, addListItem, handleC
    <div className="SelectedListContainer">
     <h3>{selectedList.name}</h3>
     <div className="ListContentContainer">
-      <TextNote selectedList={selectedList} updateNote={updateNote} />
+      <textarea
+          className="note"
+          type="text"
+          placeholder="Type a note..."
+          value={selectedList.content.note}
+          onChange={(event) => updateNote(event.target.value)}
+        />
       <ul>
           {selectedList.content.list.map((element, index) => {
             return (

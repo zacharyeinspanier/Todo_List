@@ -57,7 +57,7 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
   function updateNote(newNote) {
     setSelectedList((selectedList) => ({
       ...selectedList,
-      content: { ...selectedList.content, note: newNote },
+      content: { ...selectedList.content, note: newNote }
     }));
   }
 

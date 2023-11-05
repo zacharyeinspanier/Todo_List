@@ -1,0 +1,32 @@
+1: Changing type:
+    a: can only change when another object is currently selected
+    b: data disapears when type is changed
+
+
+
+UseEffect runs code on every render, can be run with dependencys
+
+
+Investigate file:
+
+App WORKING: 
+    Use reducer
+    New Item
+    New Content
+    Functions for managing list
+    Returns List manager and Display list
+
+List Manager: WORKING
+    Allows user to create new List, working
+Display List: 
+    Displays: List, Note, Note+List
+    Going to guess that this is the root of the issue, the note, list, and note+list are all simple
+    It could be how I am storing the data
+    Could it be that it is just taking what 
+
+Need to be fixed:
+List:
+Note: 
+Could it be that it is just taking what what ever the user inputs and setting it
+EX: user enters noting, oting is set
+Note+List: 

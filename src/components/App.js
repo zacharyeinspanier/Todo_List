@@ -55,25 +55,12 @@ function newContent(type) {
   }
 }
 
-
-
 const App = () => {
   const [state, dispatch] = useReducer(reducer, []);
   const [selectedList, setSelectedList] = useState({
     name: "",
     content: { note: "", list: [{ value: "", strike: false }] },
   });
-  
-  useEffect(()=>{
-     // update selected List
-     for(let i = 0; i < state.length; ++i){
-      if (state[i].name === selectedList.name){
-        setSelectedList(state[i]);
-        return;
-      }
-    }
-     
-  }, [state, selectedList])
 
   //adds a new todo list with name: value
   function addNewList(value) {
@@ -84,8 +71,17 @@ const App = () => {
     dispatch({ type: "delete", payload: { name: value } });
   }
 
+  function changedListType(value, action) {
+    dispatch({
+      type: "changeList",
+      payload: { name: value, itemType: action },
+    });
+  }
+
+
   //saves previous todo list and retrevies the todo list with name value
   function selectNewList(value) {
+    console.log("selecting new list")
 
     //save last selected list
     if (selectedList.name !== "" && selectedList !== "undefined") {
@@ -103,13 +99,7 @@ const App = () => {
       return item;
     });
   }
-
-  function changedListType(value, action) {
-    dispatch({
-      type: "changeList",
-      payload: { name: value, itemType: action },
-    });
-  }
+  
 
   return (
     <div className="AppContainer">
