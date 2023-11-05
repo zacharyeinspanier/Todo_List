@@ -1,3 +1,11 @@
+# Project: TODO List
+# Description:
+This app allows the user to create a todo list with notes and a list
+
+# Usesage
+Create list by pressing enter. Add to a list my pressing enter
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

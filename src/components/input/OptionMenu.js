@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
 import "../../styles/OptionMenu.css";
 
+/**
+ * Displays the option menu for changing a list type
+ * 
+ * @param {item, changedListType } param: the state item and function from App.js
+ * @returns 
+ */
 const OptionMenu = ({ item, changedListType }) => {
-  // close drop down after next click
+  // click even for displaying the dropdown menu
   window.onclick = function (event) {
     if (!event.target.classList.contains("dropdown-btn")) {
       var dropdowns = document.getElementsByClassName("dropdown-options");
@@ -14,13 +20,13 @@ const OptionMenu = ({ item, changedListType }) => {
       }
     }
   };
-
+  // click even for displaying the dropdown menu
   function handelClick() {
     document.getElementById(`dropdownlist${item}`).classList.toggle("show");
   }
 
   useEffect(() => {}, [item]);
-
+  // JSX
   return (
     <div className="dropdown">
       <button onClick={handelClick} className="dropdown-btn">

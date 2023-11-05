@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 
+/**
+ * Displays the add option for a state item
+ * 
+ * @param {addListItem, placeHolderTxt } param: function from App.js and placeholder text for form
+ * @returns 
+ */
 const Add = ({ addListItem, placeHolderTxt }) => {
   const [inputTxt, setinputTxt] = useState("");
 
@@ -8,7 +14,7 @@ const Add = ({ addListItem, placeHolderTxt }) => {
     addListItem(inputTxt);
     setinputTxt("");
   }
-
+  //JSX
   return (
     <form onSubmit={(event) => onEnter(event)}>
       <input

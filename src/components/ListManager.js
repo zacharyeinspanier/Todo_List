@@ -4,9 +4,22 @@ import Delete from "./input/Delete.js";
 import OptionMenu from "./input/OptionMenu.js";
 import "../styles/ListManager.css";
 
+/**
+ * Dsiplays the list of lists from state(reducer state)
+ * 
+ * @param {state, addNewList, selectNewList, deleteList, changedListType} param Functions from App.js
+ * @returns 
+ */
 const ListManager = ({ state, addNewList, selectNewList, deleteList, changedListType }) => {
   const ref = useRef(null);
-  //update ref to the currently selected menu item
+  /**
+   * Update ref to the currently selected menu item
+   * Call selectedNewList with list.name
+   * 
+   * @param {click} event click event
+   * @param {object} list the list item that was clicked
+   * @returns 
+   */
   function listSelect(event, list) {
     if (ref.current != null) {
       //remove class name from current ref
@@ -25,6 +38,7 @@ const ListManager = ({ state, addNewList, selectNewList, deleteList, changedList
     return;
   }
 
+  //JSX
   return (
     <div className="AllTodoListsContainer">
       <h3>All Lists</h3>

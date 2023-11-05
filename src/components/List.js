@@ -2,7 +2,14 @@ import React from "react";
 import Delete from "./input/Delete";
 import Add from "./input/Add"
 
+/**
+ * Displays a list JSX
+ * 
+ * @param {selectedList, deletListItem, addListItem, handleClick} param Functions in Display List
+ * @returns 
+ */
 const List = ({selectedList, deletListItem, addListItem, handleClick}) => {
+  //JSX
   return (
     <div className="SelectedListContainer">
       <h3>{selectedList.name}</h3>

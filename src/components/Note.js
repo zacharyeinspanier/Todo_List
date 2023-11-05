@@ -1,13 +1,13 @@
 import React from "react";
 
 
+/**
+ * JSX for a note
+ * 
+ * @param {selectedList, updateNote} param: state and function from DisplayList.js
+ * @returns 
+ */
 const Note = ({selectedList, updateNote}) => {
-
-  // Steps:
-  // 1: change the note when the selected list chances
-  // 2: update the note and save it when the note value changes
-    //Could create a method to do this
-  //console.log(selectedList.content.note);
 
   return (
     <div className="SelectedListContainer">
@@ -25,5 +25,4 @@ const Note = ({selectedList, updateNote}) => {
     </div>
   );
 };
-
 export default Note;

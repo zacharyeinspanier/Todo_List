@@ -3,6 +3,12 @@ import Delete from "./input/Delete"
 import Add from "./input/Add"
 
 
+/**
+ * JSX for note and list display
+ * 
+ * @param {selectedList, updateNote, deletListItem, addListItem, handleClick} param: state and functions from display list
+ * @returns 
+ */
 const NoteList = ({selectedList, updateNote, deletListItem, addListItem, handleClick})=>{
 
 

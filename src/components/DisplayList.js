@@ -4,10 +4,21 @@ import List from "./List";
 import NoteList from "./NoteList"
 import "../styles/DisplayList.css";
 
+/**
+ * Creates the components for a list. The note, list or note+list
+ * 
+ * @param {selectedList, setSelectedList} param: state for selected list
+ * @returns JSX for displaying the list components
+ */
 const DisplayList = ({ selectedList, setSelectedList }) => {
   
   useEffect(()=>{}, [selectedList])
 
+  /**
+   * Toggles strick through when a list item is clicked
+   * 
+   * @param {click} element list object that was clicked
+   */
   function handleClick(element) {
 
     //set the state
@@ -25,6 +36,11 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
     }));
   }
 
+  /**
+   * Deletes a list time from state
+   * 
+   * @param {string} itemName name of item to delete
+   */
   function deletListItem(itemName) {
    
     setSelectedList((selectedList) => ({
@@ -35,6 +51,11 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
 
   }
 
+  /**
+   * Adds a list time from state
+   * 
+   * @param {string} itemName name of item to add
+   */
   function addListItem(item) {
     if (item === "") {
       return;
@@ -54,6 +75,11 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
     }));
   }
 
+  /**
+   * Set user input for note to state
+   * 
+   * @param {string} newNote note to set in state
+   */
   function updateNote(newNote) {
     setSelectedList((selectedList) => ({
       ...selectedList,
@@ -61,6 +87,8 @@ const DisplayList = ({ selectedList, setSelectedList }) => {
     }));
   }
 
+  
+  // return JSX depending on the type of state
   if (selectedList.name === "") {
     return <div></div>;
   }
